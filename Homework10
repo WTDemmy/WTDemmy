@@ -1,0 +1,56 @@
+using System.Linq;
+namespace Homework10;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Student stu1 = new Student( studentID: 111, studentName: "Alice");
+        Student stu2 = new Student( studentID: 222, studentName: "Bob");
+        Student stu3 = new Student( studentID: 333, studentName: "Cathy");
+        Student stu4 = new Student( studentID: 444, studentName: "David");
+
+        Student[] student_list = {stu1, stu2, stu3, stu4};
+        // PrintInfo(); ( Tired writing out all student info)
+       // Console.WriteLine($"All Student Information:{PrintInfo}");
+
+        Dictionary<string, double> gradebook = new Dictionary<string, double>{
+            { "Alice", 4.0 },
+            { "Bob", 3.6 },
+            { "Cathy", 2.5 },
+            { "David", 1.8 }
+        };
+
+        if (!gradebook.ContainsKey("Tom")){
+            gradebook["Tom"] = 3.3;
+        }
+
+        // used the System.Linq
+
+        double averageGPA = gradebook.Values.Average();
+        Console.WriteLine($"The average GPA: {averageGPA}");
+
+        Console.WriteLine("Students with GPA greater than the average:");
+        foreach (var student in gradebook){
+            if (student.Value > averageGPA)
+            {
+                Console.WriteLine($"{student.Key}: GPA = {student.Value}");
+            }
+        }
+
+    }
+}
+class Student{
+    public int studentID {get;set;} = 0;
+    public string studentName {get;set;} = string.Empty;
+     public void PrintInfo(){
+        Console.WriteLine($"Student ID: {studentID}, Student Name: {studentName}");
+    }
+    // public static studentList (could not figure out this code)
+   
+    public Student (int studentID, string studentName){
+     this.studentID = studentID;
+     this.studentName = studentName;
+    }
+
+}
